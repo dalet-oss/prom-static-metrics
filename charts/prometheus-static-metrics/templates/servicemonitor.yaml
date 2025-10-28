@@ -1,0 +1,27 @@
+{{- if .Values.metrics.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "prometheus-static-metrics.fullname" . }}
+  labels:
+    {{- include "prometheus-static-metrics.labels" . | nindent 4 }}
+spec:
+  endpoints:
+    - port: metrics
+      path: /metrics
+      {{- if .Values.metrics.interval }}
+      interval: {{ .Values.metrics.interval }}
+      {{- end }}
+      {{- if .Values.metrics.scrapeTimeout }}
+      scrapeTimeout: {{ .Values.metrics.scrapeTimeout }}
+      {{- end }}
+      {{- if .Values.metrics.honorLabels }}
+      honorLabels: {{ .Values.metrics.honorLabels }}
+      {{- end }}
+      {{- if .Values.metrics.relabellings }}
+      metricRelabelings: {{- toYaml .Values.metrics.relabellings | nindent 6 }}
+      {{- end }}
+  selector:
+    matchLabels:
+      {{- include "prometheus-static-metrics.labels" . | nindent 6 }}
+{{- end }}
