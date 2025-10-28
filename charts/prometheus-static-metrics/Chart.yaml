@@ -1,0 +1,10 @@
+apiVersion: v2
+name: prometheus-static-metrics
+description: |-
+  This chart deploys a simple Prometheus server which allows you to expose static metrics from your cluster to the Prometheus.
+  Will be useful to display some meta information from your cluster without adding it to the some service.
+
+
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

@@ -1,9 +1,9 @@
 # prom-static-metrics
-this is a simple Prometheus server which exposes list of static metrics configured through config file
+This is a simple Prometheus server that exposes the list of static metrics configured with the config file.
 
-## server config
+## Server Config
 
-server configured through the env vars:
+Server configured with these env vars:
  - `CONFIG_FILE` - path to the config file
  - `PORT` - server port
 
@@ -12,14 +12,14 @@ server configured through the env vars:
 ```yaml
 metrics:
   - name: release_version # name of the metric
-    value: 2025.10.192 # metric value, 
+    value: x.y.z # metric value, 
     description: prints release information
   - name: is_some_feature_flag_enabled
     value: true #  could be whatever -> converted to the string
     description: Prints state of the feature flag # metric description
 ```
 
-As a result, you'll see on the /metrics endpoint of the server the following set of metrics:
+As a result, on the `/metrics` of the server the following set of metrics will be available:
 ```
 # HELP is_some_feature_flag_enabled Prints state of the feature flag
 # TYPE is_some_feature_flag_enabled gauge

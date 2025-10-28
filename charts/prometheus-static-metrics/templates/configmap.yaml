@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "prometheus-static-metrics.fullname" . }}-config
+  labels:
+    {{- include "prometheus-static-metrics.labels" . | nindent 4 }}
+data:
+{{- if .Values.config.metrics }}
+  {{ .Values.config.file }}: |-
+    metrics: {{- toYaml .Values.config.metrics | nindent 6 }}
+{{- end }}
